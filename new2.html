@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Eden of Solace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Minimal, compact styles */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        
+        /* Header */
+        header {
+            background-color: #2F4F4F;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        nav a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        /* Main Container - Everything in one view */
+        .services-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        /* Services Tabs */
+        .services-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            background-color: white;
+            border: 2px solid #2F4F4F;
+            color: #2F4F4F;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 150px;
+            max-width: 250px;
+        }
+        
+        .tab-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .tab-btn.active {
+            background-color: #2F4F4F;
+            color: white;
+        }
+        
+        /* Services Content */
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Service Grid - Everything visible */
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            height: 100%;
+        }
+        
+        /* Service Options */
+        .service-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .option-group {
+            margin-bottom: 15px;
+        }
+        
+        .option-group h4 {
+            color: #2F4F4F;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .option-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option-item:hover {
+            background: #e9ecef;
+            border-color: #2F4F4F;
+        }
+        
+        .option-item.selected {
+            background: #e3f2fd;
+            border-color: #007bff;
+        }
+        
+        .option-price {
+            font-weight: bold;
+            color: #2F4F4F;
+        }
+        
+        /* Checkbox options */
+        .checkbox-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        
+        /* Date Picker */
+        .date-picker {
+            margin: 20px 0;
+        }
+        
+        .date-picker input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        /* Booking Summary - Always visible */
+        .booking-summary {
+            background: #2F4F4F;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .summary-content {
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .total-amount {
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: #fff;
+        }
+        
+        /* Booking Form */
+        .booking-form {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2F4F4F;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn-secondary {
+            background-color: #2F4F4F;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        /* Confirmation Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-btn {
+                min-width: 120px;
+                padding: 10px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Eden of Solace</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="new2.html" class="active">Services</a>
+            <a href="contact.html">Contact Us</a>
+            
+        </nav>
+    </header>
+
+    <!-- Main Services Container -->
+    <div class="services-container">
+        <!-- Services Tabs -->
+        <div class="services-tabs">
+            <button class="tab-btn active" onclick="openTab('grave-booking')">
+                <i class="fas fa-map-marker-alt"></i> Book Grave spot
+            </button>
+            <button class="tab-btn" onclick="openTab('maintenance')">
+                <i class="fas fa-seedling"></i> Maintenance
+            </button>
+            <button class="tab-btn" onclick="openTab('anniversary')">
+                <i class="fas fa-calendar-alt"></i> Anniversary
+            </button>
+        </div>
+
+        <!-- Tab 1: Grave Booking -->
+        <div id="grave-booking" class="tab-content active">
+            <div class="service-grid">
+                <!-- Left: Service Options -->
+                <div class="service-options">
+                    <h3 style="color: #2F4F4F; margin-bottom: 20px;">Select Grave Section</h3>
+                    
+                    <div class="option-group">
+                        <div class="option-item" onclick="selectOption('family', 30000, 'grave')">
+                            <div>
+                                <strong>Family Plot</strong>
+                                <div style="font-size: 0.9em; color: #666;">Spacious family resting area</div>
+                            </div>
+                            <div class="option-price">Ksh 30,000</div>
+                        </div>
+                        
+                        <div class="option-item" onclick="selectOption('general', 22000, 'grave')">
+                            <div>
+                                <strong>General Section</strong>
+                                <div style="font-size: 0.9em; color: #666;">Standard individual plot</div>
+                            </div>
+                            <div class="option-price">Ksh 22,000</div>
+                        </div>
+                        
+                        <div class="option-item" onclick="selectOption('children', 12000, 'grave')">
+                            <div>
+                                <strong>Children's Section</strong>
+                                <div style="font-size: 0.9em; color: #666;">Special area for children</div>
+                            </div>
+                            <div class="option-price">Ksh 12,000</div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Services -->
+                    <h3 style="color: #2F4F4F; margin: 25px 0 15px 0;">Additional Services</h3>
+                    
+                    <div class="checkbox-option">
+                        <div>
+                            <input type="checkbox" id="digging" onchange="updateTotal()">
+                            <label for="digging" style="cursor: pointer;">Grave Digging Service</label>
+                        </div>
+                        <div class="option-price">Ksh 2,800</div>
+                    </div>
+                    
+                    <div class="checkbox-option">
+                        <div>
+                            <input type="checkbox" id="cleaning" onchange="updateTotal()">
+                            <label for="cleaning" style="cursor: pointer;">Site Cleaning</label>
+                        </div>
+                        <div class="option-price">Ksh 5,000</div>
+                    </div>
+
+                    <!-- Date Selection -->
+                    <div class="date-picker">
+                        <label for="service-date"><strong>Select Service Date:</strong></label>
+                        <input type="date" id="service-date" onchange="updateSummary()">
+                    </div>
+                </div>
+
+                <!-- Right: Booking Summary & Form -->
+                <div class="booking-summary">
+                    <h3 style="margin-top: 0; color: white;">Booking Summary</h3>
+                    
+                    <div class="summary-content">
+                        <div id="summary-details">
+                            <p>Select options on the left to see details here</p>
+                        </div>
+                        
+                        <div class="total-amount" id="total-display">
+                            Ksh 0
+                        </div>
+                        
+                        <!-- Booking Form (Minimal) -->
+                        <div class="booking-form">
+                            <h4 style="color: white; margin-bottom: 15px;">Your Information</h4>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" id="name" placeholder="Your name">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone *</label>
+                                    <input type="tel" id="phone" placeholder="Phone number">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" placeholder="Email address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="deceased">Deceased Name *</label>
+                                <input type="text" id="deceased" placeholder="Name of deceased">
+                            </div>
+                            
+                            <button class="btn-primary" onclick="submitBooking()">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </button>
+                            
+                            <button class="btn-secondary" onclick="showPayment()">
+                                <i class="fas fa-credit-card"></i> Make Payment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Maintenance -->
+        <div id="maintenance" class="tab-content">
+            <div class="service-grid">
+                <div class="service-options">
+                    <h3 style="color: #2F4F4F; margin-bottom: 20px;">Maintenance Services</h3>
+                    
+                    <div class="checkbox-option">
+                        <div>
+                            <input type="checkbox" id="maintenance-cleaning" onchange="updateTotalMaintenance()">
+                            <label for="maintenance-cleaning" style="cursor: pointer;">Gravesite Cleaning</label>
+                        </div>
+                        <div class="option-price">Ksh 5,000</div>
+                    </div>
+                    
+                    <div class="checkbox-option">
+                        <div>
+                            <input type="checkbox" id="maintenance-flowers" onchange="updateTotalMaintenance()">
+                            <label for="maintenance-flowers" style="cursor: pointer;">Place Fresh Flowers</label>
+                        </div>
+                        <div class="option-price">Ksh 1,200</div>
+                    </div>
+
+                    <div class="date-picker">
+                        <label for="maintenance-date"><strong>Select Service Date:</strong></label>
+                        <input type="date" id="maintenance-date" onchange="updateSummaryMaintenance()">
+                    </div>
+                </div>
+                
+                <div class="booking-summary">
+                    <h3 style="margin-top: 0; color: white;">Maintenance Booking</h3>
+                    <div class="summary-content">
+                        <div id="summary-maintenance">
+                            <p>Select maintenance services</p>
+                        </div>
+                        
+                        <div class="total-amount" id="total-maintenance">
+                            Ksh 0
+                        </div>
+                        
+                        <div class="booking-form">
+                            <h4 style="color: white; margin-bottom: 15px;">Your Information</h4>
+                            <!-- Same form fields, will be filled automatically -->
+                            <button class="btn-primary" onclick="submitMaintenance()">
+                                <i class="fas fa-calendar-check"></i> Book Maintenance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Anniversary -->
+        <div id="anniversary" class="tab-content">
+            <div class="service-grid">
+                <div class="service-options">
+                    <h3 style="color: #2F4F4F; margin-bottom: 20px;">Anniversary Services</h3>
+                    
+                    <div class="checkbox-option">
+                        <div>
+                            <input type="checkbox" id="anniversary-cleaning" onchange="updateTotalAnniversary()">
+                            <label for="anniversary-cleaning" style="cursor: pointer;">Gravesite Cleaning</label>
+                        </div>
+                        <div class="option-price">Ksh 5,000</div>
+                    </div>
+                    
+                    <div class="checkbox-option">
+                        <div>
+                            <input type="checkbox" id="anniversary-flowers" onchange="updateTotalAnniversary()">
+                            <label for="anniversary-flowers" style="cursor: pointer;">Place Memorial Flowers</label>
+                        </div>
+                        <div class="option-price">Ksh 1,200</div>
+                    </div>
+
+                    <div class="date-picker">
+                        <label for="anniversary-date"><strong>Select Anniversary Date:</strong></label>
+                        <input type="date" id="anniversary-date" onchange="updateSummaryAnniversary()">
+                    </div>
+                </div>
+                
+                <div class="booking-summary">
+                    <h3 style="margin-top: 0; color: white;">Anniversary Booking</h3>
+                    <div class="summary-content">
+                        <div id="summary-anniversary">
+                            <p>Select anniversary services</p>
+                        </div>
+                        
+                        <div class="total-amount" id="total-anniversary">
+                            Ksh 0
+                        </div>
+                        
+                        <div class="booking-form">
+                            <h4 style="color: white; margin-bottom: 15px;">Your Information</h4>
+                            <!-- Same form fields -->
+                            <button class="btn-primary" onclick="submitAnniversary()">
+                                <i class="fas fa-calendar-check"></i> Schedule Anniversary
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 style="color: #2F4F4F;">Payment Instructions</h3>
+            <div id="payment-details">
+                <!-- Will be filled by JavaScript -->
+            </div>
+            <button onclick="closePaymentModal()" style="background: #2F4F4F; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; margin-top: 20px;">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background-color: #333; color: white; text-align: center; padding: 1.5em; margin-top: 40px;">
+        <p>&copy; 2024 Eden of Solace Cemetery Services</p>
+    </footer>
+
+    <script>
+        // Tab switching
+        function openTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.currentTarget.classList.add('active');
+        }
+
+        // Price data
+        const prices = {
+            family: 30000,
+            general: 22000,
+            children: 12000,
+            digging: 2800,
+            cleaning: 5000,
+            flowers: 1200
+        };
+
+        let selectedSection = null;
+        let selectedSectionPrice = 0;
+
+        // Grave booking functions
+        function selectOption(section, price, type) {
+            selectedSection = section;
+            selectedSectionPrice = price;
+            
+            // Update UI
+            document.querySelectorAll('.option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            updateTotal();
+            updateSummary();
+        }
+
+        function updateTotal() {
+            let total = selectedSectionPrice || 0;
+            
+            if (document.getElementById('digging')?.checked) {
+                total += prices.digging;
+            }
+            
+            if (document.getElementById('cleaning')?.checked) {
+                total += prices.cleaning;
+            }
+            
+            document.getElementById('total-display').textContent = 'Ksh ' + total.toLocaleString();
+            return total;
+        }
+
+        function updateSummary() {
+            const summary = document.getElementById('summary-details');
+            const date = document.getElementById('service-date').value;
+            let html = '';
+            
+            if (selectedSection) {
+                const sectionNames = {
+                    family: 'Family Plot',
+                    general: 'General Section',
+                    children: "Children's Section"
+                };
+                html += `<div class="summary-item">
+                    <span>${sectionNames[selectedSection]}</span>
+                    <span>Ksh ${selectedSectionPrice.toLocaleString()}</span>
+                </div>`;
+            }
+            
+            if (document.getElementById('digging')?.checked) {
+                html += `<div class="summary-item">
+                    <span>Grave Digging</span>
+                    <span>Ksh ${prices.digging.toLocaleString()}</span>
+                </div>`;
+            }
+            
+            if (document.getElementById('cleaning')?.checked) {
+                html += `<div class="summary-item">
+                    <span>Site Cleaning</span>
+                    <span>Ksh ${prices.cleaning.toLocaleString()}</span>
+                </div>`;
+            }
+            
+            if (date) {
+                html += `<div class="summary-item">
+                    <span>Service Date</span>
+                    <span>${new Date(date).toLocaleDateString()}</span>
+                </div>`;
+            }
+            
+            summary.innerHTML = html || '<p>Select options to see details</p>';
+        }
+
+        // Maintenance functions
+        function updateTotalMaintenance() {
+            let total = 0;
+            
+            if (document.getElementById('maintenance-cleaning')?.checked) {
+                total += prices.cleaning;
+            }
+            
+            if (document.getElementById('maintenance-flowers')?.checked) {
+                total += prices.flowers;
+            }
+            
+            document.getElementById('total-maintenance').textContent = 'Ksh ' + total.toLocaleString();
+            return total;
+        }
+
+        function updateSummaryMaintenance() {
+            const summary = document.getElementById('summary-maintenance');
+            const date = document.getElementById('maintenance-date').value;
+            let html = '';
+            
+            if (document.getElementById('maintenance-cleaning')?.checked) {
+                html += `<div class="summary-item">
+                    <span>Gravesite Cleaning</span>
+                    <span>Ksh ${prices.cleaning.toLocaleString()}</span>
+                </div>`;
+            }
+            
+            if (document.getElementById('maintenance-flowers')?.checked) {
+                html += `<div class="summary-item">
+                    <span>Fresh Flowers</span>
+                    <span>Ksh ${prices.flowers.toLocaleString()}</span>
+                </div>`;
+            }
+            
+            if (date) {
+                html += `<div class="summary-item">
+                    <span>Service Date</span>
+                    <span>${new Date(date).toLocaleDateString()}</span>
+                </div>`;
+            }
+            
+            summary.innerHTML = html || '<p>Select services to see details</p>';
+        }
+
+        // Anniversary functions
+        function updateTotalAnniversary() {
+            let total = 0;
+            
+            if (document.getElementById('anniversary-cleaning')?.checked) {
+                total += prices.cleaning;
+            }
+            
+            if (document.getElementById('anniversary-flowers')?.checked) {
+                total += prices.flowers;
+            }
+            
+            document.getElementById('total-anniversary').textContent = 'Ksh ' + total.toLocaleString();
+            return total;
+        }
+
+        function updateSummaryAnniversary() {
+            const summary = document.getElementById('summary-anniversary');
+            const date = document.getElementById('anniversary-date').value;
+            let html = '';
+            
+            if (document.getElementById('anniversary-cleaning')?.checked) {
+                html += `<div class="summary-item">
+                    <span>Gravesite Cleaning</span>
+                    <span>Ksh ${prices.cleaning.toLocaleString()}</span>
+                </div>`;
+            }
+            
+            if (document.getElementById('anniversary-flowers')?.checked) {
+                html += `<div class="summary-item">
+                    <span>Memorial Flowers</span>
+                    <span>Ksh ${prices.flowers.toLocaleString()}</span>
+                </div>`;
+            }
+            
+            if (date) {
+                html += `<div class="summary-item">
+                    <span>Anniversary Date</span>
+                    <span>${new Date(date).toLocaleDateString()}</span>
+                </div>`;
+            }
+            
+            summary.innerHTML = html || '<p>Select services to see details</p>';
+        }
+
+        // Booking submission
+        function submitBooking() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const deceased = document.getElementById('deceased').value;
+            
+            if (!name || !email || !phone || !deceased || !selectedSection) {
+                alert('Please fill all required fields and select a grave section');
+                return;
+            }
+            
+            const total = updateTotal();
+            const date = document.getElementById('service-date').value;
+            
+            // In real implementation, send to backend
+            console.log('Booking submitted:', { name, email, phone, deceased, selectedSection, total, date });
+            
+            alert(`Booking request submitted! Total: Ksh ${total.toLocaleString()}\nWe'll contact you shortly.`);
+            
+            // Reset form
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
+            document.getElementById('total-display').textContent = 'Ksh 0';
+            document.getElementById('summary-details').innerHTML = '<p>Select options to see details</p>';
+            selectedSection = null;
+        }
+
+        function submitMaintenance() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const deceased = document.getElementById('deceased').value;
+            
+            if (!name || !email || !phone || !deceased) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            const total = updateTotalMaintenance();
+            
+            console.log('Maintenance booking submitted:', { name, email, phone, deceased, total });
+            alert(`Maintenance booked! Total: Ksh ${total.toLocaleString()}`);
+        }
+
+        function submitAnniversary() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const deceased = document.getElementById('deceased').value;
+            
+            if (!name || !email || !phone || !deceased) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            const total = updateTotalAnniversary();
+            
+            console.log('Anniversary booking submitted:', { name, email, phone, deceased, total });
+            alert(`Anniversary scheduled! Total: Ksh ${total.toLocaleString()}`);
+        }
+
+        // Payment modal
+        function showPayment() {
+            const total = updateTotal();
+            if (total === 0) {
+                alert('Please select services first');
+                return;
+            }
+            
+            document.getElementById('payment-details').innerHTML = `
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>Total Amount:</strong> Ksh ${total.toLocaleString()}</p>
+                    <p><strong>M-Pesa Payment:</strong></p>
+                    <ol style="text-align: left;">
+                        <li>Go to M-Pesa on your phone</li>
+                        <li>Select "Lipa Na M-Pesa"</li>
+                        <li>Enter Till Number: <strong>506834</strong></li>
+                        <li>Enter Amount: <strong>Ksh ${total.toLocaleString()}</strong></li>
+                        <li>Enter your M-Pesa PIN</li>
+                    </ol>
+                    <p><em>After payment, submit your booking above.</em></p>
+                </div>
+            `;
+            
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.min = today;
+            });
+            
+            // Auto-fill form data across tabs
+            const formFields = ['name', 'email', 'phone', 'deceased'];
+            formFields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                    input.addEventListener('input', function() {
+                        // Save to localStorage for persistence
+                        localStorage.setItem(field, this.value);
+                    });
+                    
+                    // Load saved data
+                    const saved = localStorage.getItem(field);
+                    if (saved) input.value = saved;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Cemetery Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+    </header>
+    <nav>
+      
+        <a href="index.html">Home</a>
+       <a href="about.html"> About us</a>
+        <a href="new2.html">Services</a>
+        <a href="contact.html">Contact Us</a>
+    </nav>
+    
+    <main>
+        <div class="contact-container">
+            <h2>Get In Touch</h2>
+            <p style="color: #666; font-size: 1.2em; max-width: 700px; margin: 0 auto 40px;">
+                We're here to assist you with any questions or concerns regarding cemetery management services.
+            </p>
+            
+            <div class="contact-methods">
+                <!-- Social Media -->
+                <div class="contact-method">
+                    <i class="fab fa-facebook-square contact-icon facebook-icon"></i>
+                    <h3>Follow Us</h3>
+                    <p>Connect with us on Facebook for updates and community news</p>
+                    <a href="https://www.facebook.com/yourpage" target="_blank" class="contact-link">
+                        <i class="fab fa-facebook"></i> Visit Facebook
+                    </a>
+                </div>
+                
+                <!-- Instagram -->
+                <div class="contact-method">
+                    <i class="fab fa-instagram contact-icon instagram-icon"></i>
+                    <h3>Follow Our Stories</h3>
+                    <p>See our latest updates and memorial stories on Instagram</p>
+                    <a href="https://www.instagram.com/yourprofile" target="_blank" class="contact-link">
+                        <i class="fab fa-instagram"></i> Follow on Instagram
+                    </a>
+                </div>
+                
+                <!-- Email -->
+                <div class="contact-method">
+                    <i class="fas fa-envelope contact-icon email-icon"></i>
+                    <h3>Email Us</h3>
+                    <p>Send us your inquiries and we'll respond within 24 hours</p>
+                    <a href="mailto:edenofsolace@gmail.com" class="contact-link">
+                        <i class="fas fa-paper-plane"></i> Send Email
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <h3>Send Us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="text" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required placeholder="What is this regarding?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Type your message here..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Contact Info -->
+            <div style="background: #2F4F4F; color: white; padding: 30px; border-radius: 10px; margin-top: 40px;">
+                <h3 style="color: white; margin-bottom: 20px;">Our Contact Information</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4><i class="fas fa-map-marker-alt"></i> Address</h4>
+                        <p>123 Cemetery Road<br>Memorial City, MC 12345</p>
+                    </div>
+                    <div>
+                        <h4><i class="fas fa-phone"></i> Phone</h4>
+                        <p>+254794588985<br>Mon-Fri: 8 AM - 6 PM</p>
+                    </div>
+                    <div>
+                        <h4><i class="fas fa-clock"></i> Office Hours</h4>
+                        <p>Monday - Friday: 8am - 5pm<br>Saturday: 9am - 1pm<br>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Cemetery Management System | Eden of Solace</p>
+    </footer>
+
+    <script>
+        // Simple form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
